@@ -1,0 +1,270 @@
+import UIKit
+
+// 1. Создайте структуру студент. Добавьте свойства: имя, фамилия, год рождения, средний бал. Создайте несколько экземпляров этой структуры и заполните их данными. Положите их всех в массив (журнал).
+
+struct Student {
+    var name: String
+    var familyName: String
+    var yearOfBitrh: Int
+    var middle: Int
+}
+
+var s1 = Student(name: "Volod", familyName: "Rynd", yearOfBitrh: 1987, middle: 10)
+var s2 = Student(name: "Karine", familyName: "Rynd", yearOfBitrh: 1989, middle: 9)
+var s3 = Student(name: "Olga", familyName: "Rynd", yearOfBitrh: 1992, middle: 8)
+var s4 = Student(name: "Roman", familyName: "Baku", yearOfBitrh: 1990, middle: 2)
+
+var jurnal = [s1, s2, s3, s4]
+
+// 2. Напишите функцию, которая принимает массив студентов и выводит в консоль данные каждого. Перед выводом каждого студента добавляйте порядковый номер в “журнале”, начиная с 1.
+
+func takeArray(array: [Student]) {
+    
+    var count = 0
+    
+    for i in array {
+        count += 1
+        print("\(count). \(i.name) \(i.familyName), year: \(i.yearOfBitrh), middle mark: \(i.middle)")
+    }
+}
+
+takeArray(array: jurnal)
+print("-----------------------")
+
+// 3. С помощью функции sorted отсортируйте массив по среднему баллу, по убыванию и распечатайте “журнал”.
+
+var min = jurnal.sorted {$0.middle < $1.middle}
+var max = jurnal.sorted {$0.middle > $1.middle}
+takeArray(array: max)
+print("-----------------------")
+takeArray(array: min)
+
+// 4. Отсортируйте теперь массив по фамилии (по возрастанию), причем если фамилии одинаковые, а вы сделайте так чтобы такое произошло, то сравниваются по имени. Распечатайте “журнал”.
+
+var increase = jurnal.sorted(by: { (first: Student, second: Student) -> Bool in
+    
+    if first.familyName == second.familyName {
+        
+        return first.name < second.name
+        
+    } else {
+            return first.familyName < second.familyName
+    }
+})
+
+print("----------------------")
+
+takeArray(array: increase)
+
+
+// 5. Создайте переменную и присвойте ей ваш существующий массив. Измените в нем данные всех студентов. Изменится ли первый массив? Распечатайте оба массива.
+
+var arrayStudent = jurnal
+
+arrayStudent[0].familyName = "None"
+arrayStudent[0].name = "AnyOne"
+arrayStudent[0].middle = 1
+arrayStudent[0].yearOfBitrh = 0
+arrayStudent[1].familyName = "Unknown"
+arrayStudent[1].name = "Varios"
+arrayStudent[1].middle = 2
+arrayStudent[1].yearOfBitrh = 1
+arrayStudent[2].familyName = "Clone"
+arrayStudent[2].name = "Clonov"
+arrayStudent[2].middle = 2
+arrayStudent[2].yearOfBitrh = 3
+arrayStudent[3].familyName = "Forgot"
+arrayStudent[3].name = "ToSay"
+arrayStudent[3].middle = 3
+arrayStudent[3].yearOfBitrh = 4
+
+print("Array i used")
+
+takeArray(array: jurnal)
+
+print("Array that im chenged")
+
+takeArray(array: arrayStudent)
+
+//  6. Теперь проделайте все тоже самое, но не для структуры Студент, а для класса. Какой результат в 5м задании? Что изменилось и почему?
+
+class StudentClass {
+    
+    var name: String
+    var familyName: String
+    var yearOfBitrh: Int
+    var middle: Int
+    
+    init(name: String, familyNmae: String, yearOfBirth: Int, middle: Int) {
+        self.name = name
+        self.familyName = familyNmae
+        self.yearOfBitrh = yearOfBirth
+        self.middle = middle
+    }
+}
+
+var sc1 = StudentClass(name: "Fitst", familyNmae: "Second", yearOfBirth: 3, middle: 4)
+var sc2 = StudentClass(name: "Third", familyNmae: "Four", yearOfBirth: 5, middle: 6)
+var sc3 = StudentClass(name: "Five", familyNmae: "Six", yearOfBirth: 6, middle: 7)
+var sc4 = StudentClass(name: "Seven", familyNmae: "Eight", yearOfBirth: 7, middle: 8)
+
+var jurnalClass = [sc1, sc2, sc3, sc4]
+
+var jurTOChange = jurnalClass
+
+jurTOChange[0].familyName = "1"
+jurTOChange[0].name = "2"
+jurTOChange[0].middle = 3
+jurTOChange[0].yearOfBitrh = 4
+
+jurTOChange[1].familyName = "1"
+jurTOChange[1].name = "2"
+jurTOChange[1].middle = 3
+jurTOChange[1].yearOfBitrh = 4
+
+jurTOChange[2].familyName = "1"
+jurTOChange[2].name = "2"
+jurTOChange[2].middle = 3
+jurTOChange[2].yearOfBitrh = 4
+
+jurTOChange[3].familyName = "1"
+jurTOChange[3].name = "2"
+jurTOChange[3].middle = 3
+jurTOChange[3].yearOfBitrh = 4
+
+func arrayStudentClass(array: [StudentClass]) {
+    
+    var count = 0
+    
+    for i in array {
+        count += 1
+        print("\(count) \(i.name) \(i.familyName), year of birth \(i.yearOfBitrh), mark: \(i.middle)")
+    }
+}
+
+print("original class sudent")
+arrayStudentClass(array: jurnalClass)
+
+print("Chenged class student")
+arrayStudentClass(array: jurTOChange)
+
+print("007. Уровень супермен")
+
+//Выполните задание шахмат из урока по энумам используя структуры либо классы
+
+// 1. Создать энум с шахматными фигруами (король, ферзь и т.д.). Каждая фигура должна иметь цвет белый либо черный (надеюсь намек понят), а так же букву и цифру для позиции. Создайте пару фигур с расположением на доске, так, чтобы черному королю был мат :) Поместите эти фигуры в массив фигур
+
+class Chess {
+    
+    var figName: ChessName
+    var figColor: ChessColor
+    var figPosition: Position
+    
+    init(figName: ChessName, figColor: ChessColor, figPosition: Position) {
+        self.figName = figName
+        self.figColor = figColor
+        self.figPosition = figPosition
+    }
+}
+
+enum ChessColor: String {
+    
+    case Black = "Black"
+    case White = "White"
+}
+
+enum ChessName: String {
+    
+    case King = "King"
+    case Queen = "Queen"
+    case Bishop = "Bishop"
+    case Knight = "Knight"
+    case Rook = "Rook"
+    case Pawn = "Pawn"
+}
+
+struct Position {
+    
+    var x: String
+    var y: Int
+}
+
+var f1 = Chess(figName: ChessName.King, figColor: .Black, figPosition: Position.init(x: "A", y: 1))
+var f2 = Chess(figName: ChessName.King, figColor: .White, figPosition: Position.init(x: "B", y: 2))
+
+var arrayChess = [f1, f2]
+
+// 2. Сделайте так, чтобы энумовские значения имели rawValue типа String. Каждому типу фигуры установите соответствующее английское название. Создайте функцию, которая выводит в консоль (текстово, без юникода) название фигуры, цвет и расположение. Используя эту функцию распечатайте все фигуры в массиве.
+
+func chessInfo(arr: [Chess]) {
+
+    for i in arr {
+        print("\(i.figName) \(i.figColor) on \(i.figPosition.x)\(i.figPosition.y)")
+    }
+}
+
+chessInfo(arr: arrayChess)
+
+// 3. Используя красивые юникодовые представления шахматных фигур, выведите в консоли вашу доску. Если клетка не содержит фигуры, то используйте белую или черную клетку. Это должна быть отдельная функция, которая распечатывает доску с фигурами (принимает массив фигур и ничего не возвращает)
+
+var blackKingPiece = " \u{265A}"
+var whiteKingPiece = " \u{2654}"
+var blackQueenPiece = " \u{265B}"
+var whiteQueenPiece = " \u{2655}"
+var blackBishopPiece = "\u{265D}"
+var whiteBishopPiece = "\u{2657}"
+var blackKnightPiece = "\u{2658}"
+var whiteKnightPiece = "\u{265E}"
+var blackRookPiece = "\u{265C}"
+var whiteRookPiece = "\u{2656}"
+var blackPawnPiece = "\u{265F}"
+var whitePawnPiece = "\u{2659}"
+var whiteCell = "\u{2B1C}"
+var blackCell = "\u{2B1B}"
+
+func chessPiece(fig: Chess) -> String {
+    
+    switch (fig.figName, fig.figColor) {
+        
+    case let(name, color) where name == .King: return color == .Black ? blackKingPiece : whiteKingPiece
+    case let(name, color) where name == .Queen: return color == .Black ? blackQueenPiece : whiteQueenPiece
+    case let(name, color) where name == .Bishop: return color == .Black ? blackBishopPiece : whiteBishopPiece
+    case let(name, color) where name == .Knight: return color == .Black ? blackKnightPiece : whiteKnightPiece
+    case let(name, color) where name == .Rook: return color == .Black ? blackRookPiece : whiteRookPiece
+    case let(name, color) where name == .Pawn: return color == .Black ? blackPawnPiece : whitePawnPiece
+        
+    default: return "Shit happens"
+    }
+}
+
+func cheesDesk(arr: [Chess]) {
+    
+    let letters = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    
+    for dig in (1...8).reversed() {
+        second: for (index, value) in letters.enumerated() {
+           for figure in arr {
+                if figure.figPosition.x == value && figure.figPosition.y == dig {
+                    print(chessPiece(fig: figure), terminator: "")
+                    continue second
+                }
+            }
+            print((index + 1) % 2 == dig % 2 ? whiteCell : blackCell, terminator: "")
+        }
+        print()
+    }
+}
+
+cheesDesk(arr: arrayChess)
+
+ // 4. Создайте функцию, которая будет принимать шахматную фигуру и тюпл новой позиции. Эта функция должна передвигать фигуру на новую позицию, причем перемещение должно быть легальным: нельзя передвинуть фигуру за пределы поля и нельзя двигать фигуры так, как нельзя их двигать в реальных шахматах (для мегамонстров программирования). Вызовите эту функцию для нескольких фигур и распечатайте поле снова.
+
+func movingFigure(fig: inout Chess, newPos: (x: String, y: Int)) {
+    fig.figPosition.x = newPos.x
+    fig.figPosition.y = newPos.y
+    cheesDesk(arr: arrayChess)
+}
+
+
+print()
+movingFigure(fig: &f1, newPos: (x: "D", y: 4))
